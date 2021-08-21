@@ -23,8 +23,8 @@ class TicTacToe {
         win++;
       }
       if (win === this.rowLength) return player;
-      else return false;
     }
+    return false;
   }
   checkAsDiag(player) {
     let win = 0;
@@ -35,6 +35,16 @@ class TicTacToe {
     }
     if (win === 3) return player;
     else return false;
+  }
+  chekWinSimmetric() {
+    if (
+      (this.matrix[1][1] === this.matrix[0][0]) === this.matrix[2][0] ||
+      (this.matrix[1][1] === this.matrix[0][0]) === this.matrix[0][2] ||
+      (this.matrix[1][1] === this.matrix[0][2]) == this.matrix[2][2] ||
+      (this.matrix[1][1] === this.matrix[2][0]) == this.matrix[2][2]
+    ) {
+      return this.matrix[1][1];
+    } else return null;
   }
   checkWinDiag() {
     return (
@@ -88,7 +98,12 @@ class TicTacToe {
   }
 
   getWinner() {
-    return this.checkWinLine() || this.checkWinDiag() || null;
+    return (
+      this.checkWinLine() ||
+      this.checkWinDiag() ||
+      this.chekWinSimmetric() ||
+      null
+    );
   }
 
   noMoreTurns() {
@@ -111,79 +126,34 @@ class TicTacToe {
   }
 }
 game = new TicTacToe();
-game.nextTurn(2, 2);
 
 game.nextTurn(1, 2);
-
-game.nextTurn(0, 0);
-
-game.nextTurn(1, 0);
-
-game.nextTurn(0, 1);
-
-game.nextTurn(2, 2);
-
-game.nextTurn(2, 0);
-
-game.nextTurn(2, 0);
-
-game.nextTurn(0, 0);
-
-game.nextTurn(0, 1);
-
-game.nextTurn(1, 2);
-
-game.nextTurn(2, 0);
-
-game.nextTurn(0, 1);
-
-game.nextTurn(0, 0);
-
-game.nextTurn(2, 1);
-
-game.nextTurn(2, 2);
-
-game.nextTurn(2, 2);
-
-game.nextTurn(0, 2);
-
-game.nextTurn(1, 2);
-
-game.nextTurn(1, 2);
-
-game.nextTurn(0, 2);
-
-game.nextTurn(1, 2);
-
-game.nextTurn(2, 1);
-
-game.nextTurn(2, 0);
-
-game.nextTurn(0, 0);
-
-game.nextTurn(1, 2);
-
-game.nextTurn(0, 0);
-
-game.nextTurn(1, 0);
-
-game.nextTurn(0, 2);
-
-game.nextTurn(2, 1);
-
-game.nextTurn(0, 1);
-
-game.nextTurn(0, 0);
-
-game.nextTurn(2, 2);
-
-game.nextTurn(0, 1);
-
-game.nextTurn(0, 0);
-
-game.nextTurn(2, 0);
 
 game.nextTurn(1, 1);
 
-console.log(game.isDraw());
+game.nextTurn(0, 0);
+
+game.nextTurn(2, 1);
+
+game.nextTurn(1, 1);
+
+game.nextTurn(2, 2);
+
+game.nextTurn(1, 0);
+
+game.nextTurn(0, 1);
+
+game.nextTurn(2, 1);
+
+game.nextTurn(0, 2);
+
+game.nextTurn(1, 1);
+
+game.nextTurn(0, 2);
+
+game.nextTurn(2, 2);
+
+game.nextTurn(2, 0);
+
+console.log(game.getWinner());
 module.exports = TicTacToe;
